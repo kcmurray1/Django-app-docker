@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      # Your desired database name
+      MYSQL_DATABASE: myDB 
+      # Your desired database user
+      MYSQL_USER: myuser        
+      # Your desired database password
+      MYSQL_PASSWORD: mypassword 
+      # Root password for MySQL
+      MYSQL_ROOT_PASSWORD: root_password 
+    volumes:
+      # Persistent storage for database data
+      - db_data:/var/lib/mysql 
+    ports:
+      - "3307:3306"
+  app:
+    # Build the Django application from the current directory
+    build: . 
+    # Command to run Django
+    command: ./entrypoint.sh 
+    # volumes:
+    #   - ./people:/usr/src/app # Mount your project directory into the container
+    ports:
+    # Expose Django port to host
+      - "8000:8000" 
+    depends_on:
+    # Ensure the database service starts before the web service
+      - db 
+    environment:
+      # Use the service name 'db' as the hostname for MySQL
+      DB_HOST: db 
+      DB_NAME: myDB
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+
+volumes:
+  # Define the named volume for database persistence
+  db_data:

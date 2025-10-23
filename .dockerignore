@@ -1,0 +1,22 @@
+
+# Exclude Docker build files
+Dockerfile
+docker-compose.yml
+docker-compose.*.yml # Exclude any auxiliary compose files
+
+# Exclude source control files
+.git
+.gitignore
+
+# Exclude environment files
+.env
+
+# Exclude Python bytecode and cache directories
+__pycache__/
+*.pyc
+.pytest_cache
+
+# Exclude Python virtual environment 
+venv/
+env/
+.env/

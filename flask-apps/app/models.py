@@ -28,12 +28,12 @@ class User(db.Model):
 
     @validates('name')
     def validate_name(self, key, value):
-        print(key, value)
+        print('validating..', key, value)
 
         return value
 
     def __repr__(self):
-        return f"User: {self.id} {self.name} with posts {self.posts}"
+        return f"User: {self.id} {self.name}"
 
 class Post(db.Model):
     """Post can be made by a single person"""
@@ -51,7 +51,7 @@ class Post(db.Model):
 
     
     def __repr__(self):
-        return f"Post {self.id} {self.tags} {self.content} posted by {self.author}"
+        return f"Post {self.id} {self.tags} posted by {self.author} {self.content}"
 
 class Tag(db.Model):
     """Each post can have many tags"""

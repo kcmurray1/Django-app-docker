@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    # Build the Flask application from the current directory
+    build: . 
+    # Command to run Flask
+    command: ./entrypoint.sh 
+
+    ports:
+    # Expose flask port to host
+      - "5000:5000" 
+    environment:
+      SQLITE_DB_NAME: testDB 

@@ -22,6 +22,7 @@ class User(db.Model):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(50), unique=True)
+    age: Mapped[int] = mapped_column()
 
     # One to many
     posts: Mapped[List["Post"]] = relationship(back_populates="author")

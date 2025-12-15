@@ -1,29 +1,22 @@
 from app.models import User, Tag, Post, db
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 
-def serailize(instance, plus=None):
-
-    attributes = [col.key for col in instance.__table__.columns] 
-
-    if plus:
-        attributes.extend(plus if isinstance(plus, list) else [plus])
-
-    res = {attr : getattr(instance, attr) for attr in attributes}
-
-    return res
+class UserSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        load_instance = True
+        include_fk = True
 
 
-def UserSerializer(data: User | list[User]):
-    """Cnvert User object to JSON"""
-    return [serailize(user) for user in data]
+class TagSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Tag
+        load_instance = True
+        include_fk = True
 
-    
-
-def PostSerializer(data):
-    """"""
-    return [serailize(post) for post in data]
-
-
-def TagSerializer(data: User | list[User]):
-    """Cnvert User object to JSON"""
-    return [serailize(tag) for tag in data]
+class PostSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Post
+        load_instance = True
+        include_fk = True

@@ -37,10 +37,6 @@ def serailize_general(instance, plus=None):
     return res
 
 
-   
-        
-  
-
 def test_validation(app):
     with app.app_context():
         data = {"name" : "John"}
